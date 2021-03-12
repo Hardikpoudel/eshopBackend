@@ -7,6 +7,7 @@ const morgan = require("morgan");
 //mongoose is responsible opration for all mongodb database
 const mongoose = require("mongoose");
 const cors = require("cors");
+const authJwt = require("./helpers/jwt");
 
 //for knowing the type of request sending from the frontend
 require("dotenv/config");
@@ -23,10 +24,14 @@ const categoriesRoutes = require("./routes/categories");
 const productRouter = require("./routes/product");
 const userRoutes = require("./routes/users");
 const ordersRoutes = require("./routes/orders");
+const errorHandler = require("./helpers/error-handler");
 
 // for the middleware section
 app.use(bodyParser.json());
 app.use(morgan("tiny"));
+//for using the user defined JWT
+app.use(authJwt());
+app.use(errorHandler);
 
 //routes
 //using the product api route as middleware
