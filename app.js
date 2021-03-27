@@ -31,6 +31,8 @@ app.use(bodyParser.json());
 app.use(morgan("tiny"));
 //for using the user defined JWT
 app.use(authJwt());
+//for getting image in frontend
+app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 app.use(errorHandler);
 
 //routes
