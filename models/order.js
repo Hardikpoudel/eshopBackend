@@ -63,10 +63,13 @@ orderSchema.set("toJSON", {
 
 exports.Order = mongoose.model("Order", orderSchema);
 
+//
 /**
 Order Example:
 
-{
+{   //first of all user has a cart and he select two products
+    // so order items will be the orders of two item
+    //in this way we have the array of order items with quantity and product
     "orderItems" : [
         {
             "quantity": 3,

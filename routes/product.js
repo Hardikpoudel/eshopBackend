@@ -66,7 +66,9 @@ router.get(`/:id`, async (req, res) => {
   const product = await Product.findById(req.params.id).populate("category");
 
   if (!product) {
-    res.status(500).json({ success: false });
+    res
+      .status(500)
+      .json({ success: false, message: "!! the product cannot be found!!" });
   }
   res.send(product);
 });
@@ -85,7 +87,9 @@ router.post(`/`, uploadOptions.single("image"), async (req, res) => {
 
   const fileName = req.file.filename;
   //protocol get the http protocol and host get your local host
-  const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
+
+  const basePath = `${req.protocol}://10.0.2.2:3000/public/uploads/`;
+  // const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
   let product = new Product({
     name: req.body.name,
     description: req.body.description,
@@ -141,6 +145,7 @@ router.put("/:id", async (req, res) => {
   res.send(product);
 });
 
+//for deleting the product based on the ID provided by the user
 router.delete("/:id", (req, res) => {
   Product.findByIdAndRemove(req.params.id)
     .then((product) => {
