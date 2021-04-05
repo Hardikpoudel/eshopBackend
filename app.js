@@ -55,6 +55,13 @@ mongoose
     console.log(err);
   });
 
+//development
 app.listen(3000, () => {
   console.log("server is running http://localhost:3000");
+});
+
+//for production if the server need to be accessed from both IOS and android
+var server = app.listen(process.env.PORT || 3000, function () {
+  var port = server.address().port;
+  console.log("Express is working on port " + port);
 });
